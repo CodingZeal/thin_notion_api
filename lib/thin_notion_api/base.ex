@@ -1,8 +1,8 @@
 defmodule ThinNotionApi.Base do
   @moduledoc false
 
-  alias ThinNotionApi.Parser
   import ThinNotionApi.Utils
+  alias ThinNotionApi.Parser
 
   @base_url "https://api.notion.com/v1"
 
