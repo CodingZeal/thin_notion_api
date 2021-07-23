@@ -160,29 +160,43 @@ defmodule ThinNotionApi.Databases do
     post("databases/" <> database_id <> "/query", body_params)
   end
 
-  @spec create_database(any, any, any) :: any
-  def create_database(parent_id, title, properties \\ %{
+  @spec create_database!(String.to_atom(), String.t(), map()) :: any
+  def create_database!(parent_id, title, properties \\ %{
     Name: %{
       title: %{}
     },
   }) do
-    body_params = %{
-      parent: %{
-        type: "page_id",
-        page_id: parent_id
-      },
-      title: [
-        %{
-            type: "text",
-            text: %{
-                content: title,
-                link: nil
-            }
-        }
-      ],
-      properties: properties
-    }
+    body_params = %{}
+    |> set_parent(parent_id)
+    |> set_title(title)
+    |> set_properties(properties)
 
     post("databases", body_params)
+  end
+
+  defp set_parent(map, parent_id) do
+    Map.put(map, :parent, %{
+      type: "page_id",
+      page_id: parent_id
+    })
+  end
+
+  defp set_title(map, title) do
+    Map.put(map, :title, [%{
+      type: "text",
+      text: %{
+          content: title,
+          link: nil
+      }
+    }])
+  end
+
+  defp set_properties(map, properties) do
+    case Map.values(properties) |> Enum.any?(fn (value) -> Map.has_key?(value, :title) end) do
+      true ->
+        Map.put(map, :properties, properties)
+      _ ->
+        raise "You must have exactly one database property schema object of type 'title' in your properties."
+    end
   end
 end
