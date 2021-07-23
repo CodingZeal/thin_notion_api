@@ -1,4 +1,8 @@
 defmodule ThinNotionApi.Databases do
+  @moduledoc """
+  Module for interacting with the Notion Databases.
+  """
+
   import ThinNotionApi.Base
 
   @doc """
