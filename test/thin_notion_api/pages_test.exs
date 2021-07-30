@@ -1,0 +1,19 @@
+defmodule ThinNotionApi.PahesTest do
+  use ExUnit.Case, async: true
+  use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
+
+  alias ThinNotionApi.Pages
+
+  setup_all do
+    HTTPoison.start
+  end
+
+  test "GET retrieve_pages" do
+    use_cassette "get_retrieve_pages" do
+      {:ok, response} = Pages.retrieve_page("9b4a624d5a18482ab2187e54166edda7")
+      assert Map.get(response, "id") |> String.replace("-", "") == "9b4a624d5a18482ab2187e54166edda7"
+      assert Map.keys(response) == ["archived", "created_time", "id", "last_edited_time", "object", "parent", "properties", "url"]
+      assert get_in(response, ["properties", "title", "title"]) |> Enum.at(0) |> get_in(["plain_text"]) == "Thin Notion Test Workspace"
+    end
+  end
+end
