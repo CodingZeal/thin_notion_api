@@ -164,6 +164,48 @@ defmodule ThinNotionApi.Databases do
     post("databases/" <> database_id <> "/query", body_params)
   end
 
+  @doc """
+  Gets a list of Pages contained in the database, filtered and ordered according to the filter conditions and sort criteria provided in the request. The response may contain fewer than page_size of results.
+
+  ## Examples:
+      iex> ThinNotionApi.Databases.create_database!("9b4a624d5a18482ab2187e54166edda7", "New Database")
+      {:ok,
+        %{
+          "created_time" => "2021-07-30T20:44:00.000Z",
+          "id" => "99315749-1f39-4095-9a40-449876f23f95",
+          "last_edited_time" => "2021-07-30T20:44:00.000Z",
+          "object" => "database",
+          "parent" => %{
+            "page_id" => "9b4a624d-5a18-482a-b218-7e54166edda7",
+            "type" => "page_id"
+          },
+          "properties" => %{
+            "Name" => %{
+              "id" => "title",
+              "name" => "Name",
+              "title" => %{},
+              "type" => "title"
+            }
+          },
+          "title" => [
+            %{
+              "annotations" => %{
+                "bold" => false,
+                "code" => false,
+                "color" => "default",
+                "italic" => false,
+                "strikethrough" => false,
+                "underline" => false
+              },
+              "href" => nil,
+              "plain_text" => "New Database",
+              "text" => %{"content" => "New Database", "link" => nil},
+              "type" => "text"
+            }
+          ]
+        }
+      }
+  """
   @spec create_database!(String.to_atom(), String.t(), map()) :: any
   def create_database!(parent_id, title, properties \\ %{
     Name: %{
