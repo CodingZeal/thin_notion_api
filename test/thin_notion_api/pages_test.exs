@@ -16,4 +16,20 @@ defmodule ThinNotionApi.PahesTest do
       assert get_in(response, ["properties", "title", "title"]) |> Enum.at(0) |> get_in(["plain_text"]) == "Thin Notion Test Workspace"
     end
   end
+
+  test "POST create_page of type page" do
+    use_cassette "post_create_page_type_page" do
+      {:ok, response} = Pages.create_page(:page, "9b4a624d5a18482ab2187e54166edda7")
+      assert Map.keys(response) == ["archived", "created_time", "id", "last_edited_time", "object", "parent", "properties", "url"]
+      assert get_in(response, ["properties", "title", "title"]) |> Enum.count == 0
+    end
+  end
+
+  test "POST create_page of type database" do
+    use_cassette "post_create_page_type_database" do
+      {:ok, response} = Pages.create_page(:database, "9b4a624d5a18482ab2187e54166edda7")
+      assert Map.keys(response) == ["archived", "created_time", "id", "last_edited_time", "object", "parent", "properties", "url"]
+      assert get_in(response, ["properties", "title", "title"]) |> Enum.count == 0
+    end
+  end
 end

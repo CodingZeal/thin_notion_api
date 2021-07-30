@@ -46,4 +46,19 @@ defmodule ThinNotionApi.Pages do
   def retrieve_page(page_id) do
     get("pages/#{page_id}")
   end
+
+  def create_page(parent_type, parent_id, properties \\ %{}, children \\ []) when parent_type == :page do
+    body_params = %{}
+    |> set_page_parent(parent_id)
+    |> Map.put(:properties, properties)
+    |> Map.put(:childern, children)
+
+    post("pages", body_params)
+  end
+
+  defp set_page_parent(map, id) do
+    Map.put(map, :parent, %{
+      page_id: id
+    })
+  end
 end
