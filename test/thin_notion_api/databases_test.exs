@@ -15,4 +15,12 @@ defmodule ThinNotionApi.DatabasesTest do
       assert Map.keys(response) == ["created_time", "id", "last_edited_time", "object", "parent", "properties", "title"]
     end
   end
+
+  test "GET list_databases" do
+    use_cassette "get_list_databases" do
+      {:ok, response} = Databases.list_databases()
+      assert Map.get(response, "object") == "list"
+      assert Map.keys(response) == ["has_more", "next_cursor", "object", "results"]
+    end
+  end
 end
