@@ -48,7 +48,8 @@ defmodule ThinNotionApi.Pages do
     get("pages/#{page_id}")
   end
 
-  def create_page(:page, parent_id, properties \\ %{}, children \\ []) do
+  def create_page(type, parent_id, properties \\ %{}, children \\ [])
+  def create_page(:page, parent_id, properties, children) do
     body_params = %{}
     |> Properties.set_page_parent(parent_id)
     |> Map.put(:properties, properties)
@@ -57,11 +58,52 @@ defmodule ThinNotionApi.Pages do
     post("pages", body_params)
   end
 
-  def create_page(:database, parent_id, title, properties, children) do
+  @doc """
+  Create a page inside of a database.
+
+  ## Examples:
+      iex> ThinNotionApi.Pages.create_page(:database, "ee90be7f3fd14fd5961ef4203c7d9a81", %{ "title": %{ "title": [%{ "type": "text", "text": %{ "content": "Create Page Database" } }] } })
+      {:ok,
+        %{
+          "archived" => false,
+          "created_time" => "2021-08-13T21:50:00.000Z",
+          "id" => "f96939de-e0a4-4175-a3ae-da8ee7512432",
+          "last_edited_time" => "2021-08-13T21:50:00.000Z",
+          "object" => "page",
+          "parent" => %{
+            "database_id" => "ee90be7f-3fd1-4fd5-961e-f4203c7d9a81",
+            "type" => "database_id"
+          },
+          "properties" => %{
+            "Name" => %{
+              "id" => "title",
+              "title" => [
+                %{
+                  "annotations" => %{
+                    "bold" => false,
+                    "code" => false,
+                    "color" => "default",
+                    "italic" => false,
+                    "strikethrough" => false,
+                    "underline" => false
+                  },
+                  "href" => nil,
+                  "plain_text" => "Create Page Database",
+                  "text" => %{"content" => "Create Page Database", "link" => nil},
+                  "type" => "text"
+                }
+              ],
+              "type" => "title"
+            }
+          },
+          "url" => "https://www.notion.so/Create-Page-Database-f96939dee0a44175a3aeda8ee7512432"
+        }
+      }
+  """
+  def create_page(:database, parent_id, properties, children) do
     body_params = %{}
     |> Properties.set_database_parent(parent_id)
-    |> Properties.set_title(title)
-    |> Map.put(:properties, properties)
+    |> Properties.set_database_properties(properties)
     |> Map.put(:childern, children)
 
     post("pages", body_params)

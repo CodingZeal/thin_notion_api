@@ -17,8 +17,7 @@ defmodule ThinNotionApi.Properties do
     Map.put(map, :title, [%{
       type: "text",
       text: %{
-          content: title,
-          link: nil
+          content: title
       }
     }])
   end
