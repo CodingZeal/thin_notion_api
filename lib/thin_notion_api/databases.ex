@@ -4,6 +4,7 @@ defmodule ThinNotionApi.Databases do
   """
 
   import ThinNotionApi.Base
+  alias ThinNotionApi.Properties
 
   @doc """
   Retrieves a Database object using the ID specified.
@@ -214,8 +215,8 @@ defmodule ThinNotionApi.Databases do
   }) do
     body_params = %{}
     |> set_parent(parent_id)
-    |> set_title(title)
-    |> set_properties(properties)
+    |> Properties.set_title(title)
+    |> Properties.set_database_properties(properties)
 
     post("databases", body_params)
   end
@@ -225,24 +226,5 @@ defmodule ThinNotionApi.Databases do
       type: "page_id",
       page_id: parent_id
     })
-  end
-
-  defp set_title(map, title) do
-    Map.put(map, :title, [%{
-      type: "text",
-      text: %{
-          content: title,
-          link: nil
-      }
-    }])
-  end
-
-  defp set_properties(map, properties) do
-    case Map.values(properties) |> Enum.any?(fn (value) -> Map.has_key?(value, :title) end) do
-      true ->
-        Map.put(map, :properties, properties)
-      _ ->
-        raise "You must have exactly one database property schema object of type 'title' in your properties."
-    end
   end
 end

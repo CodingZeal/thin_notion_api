@@ -1,5 +1,6 @@
 defmodule ThinNotionApi.Pages do
   import ThinNotionApi.Base
+  alias ThinNotionApi.Properties
 
   @doc """
   Retrieves a Page object using the ID specified.
@@ -47,18 +48,22 @@ defmodule ThinNotionApi.Pages do
     get("pages/#{page_id}")
   end
 
-  def create_page(parent_type, parent_id, properties \\ %{}, children \\ []) when parent_type == :page do
+  def create_page(:page, parent_id, properties \\ %{}, children \\ []) do
     body_params = %{}
-    |> set_page_parent(parent_id)
+    |> Properties.set_page_parent(parent_id)
     |> Map.put(:properties, properties)
     |> Map.put(:childern, children)
 
     post("pages", body_params)
   end
 
-  defp set_page_parent(map, id) do
-    Map.put(map, :parent, %{
-      page_id: id
-    })
+  def create_page(:database, parent_id, title, properties, children) do
+    body_params = %{}
+    |> Properties.set_database_parent(parent_id)
+    |> Properties.set_title(title)
+    |> Map.put(:properties, properties)
+    |> Map.put(:childern, children)
+
+    post("pages", body_params)
   end
 end
