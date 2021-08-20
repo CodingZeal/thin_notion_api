@@ -127,6 +127,56 @@ defmodule ThinNotionApi.Pages do
     post("pages", body_params)
   end
 
+  @doc """
+  Update a pages properties or archive (delete) it.
+
+  Properties that are not set via the properties parameter will remain unchanged.
+
+  If the parent is a database, the new property values in the properties parameter must conform to the parent database's property schema.
+
+  This endpoint is for updating page properties, not page content. To fetch page content, use the retrieve block children endpoint. To append page content, use the append block children endpoint.
+
+  ## Examples:
+      iex>  ThinNotionApi.Pages.update_page("c8445875c2cc424eb9eacba94cac667d", properties, false)
+      {:ok,
+      %{
+        "archived" => false,
+        "created_time" => "2021-08-20T20:26:00.000Z",
+        "id" => "c8445875-c2cc-424e-b9ea-cba94cac667d",
+        "last_edited_time" => "2021-08-20T21:07:00.000Z",
+        "object" => "page",
+        "parent" => %{
+          "page_id" => "9b4a624d-5a18-482a-b218-7e54166edda7",
+          "type" => "page_id"
+        },
+        "properties" => %{
+          "title" => %{
+            "id" => "title",
+            "title" => [
+              %{
+                "annotations" => %{
+                  "bold" => false,
+                  "code" => false,
+                  "color" => "default",
+                  "italic" => false,
+                  "strikethrough" => false,
+                  "underline" => false
+                },
+                "href" => nil,
+                "plain_text" => "Test: Used for updating page test",
+                "text" => %{
+                  "content" => "Test: Used for updating page test",
+                  "link" => nil
+                },
+                "type" => "text"
+              }
+            ],
+            "type" => "title"
+          }
+        },
+        "url" => "https://www.notion.so/Test-Used-for-updating-page-test-c8445875c2cc424eb9eacba94cac667d"
+      }}
+  """
   @spec update_page(String.t(), map(), boolean()) :: map()
   def update_page(page_id, properties \\ %{}, archived \\ false) do
 
