@@ -15,10 +15,19 @@ defmodule ThinNotionApi.Base do
 
   def post(path_arg, body \\ %{}) do
     json_body = Jason.encode!(body)
-    IO.puts(json_body)
+
     path_arg
     |> build_url()
     |> HTTPoison.post(json_body, post_request_headers())
+    |> Parser.parse()
+  end
+
+  def patch(path_arg, body \\ %{}) do
+    json_body = Jason.encode!(body)
+
+    path_arg
+    |> build_url()
+    |> HTTPoison.patch(json_body, post_request_headers())
     |> Parser.parse()
   end
 

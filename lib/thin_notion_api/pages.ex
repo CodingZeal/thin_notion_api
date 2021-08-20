@@ -126,4 +126,14 @@ defmodule ThinNotionApi.Pages do
 
     post("pages", body_params)
   end
+
+  @spec update_page(String.t(), map(), boolean()) :: map()
+  def update_page(page_id, properties \\ %{}, archived \\ false) do
+
+    body_params = %{}
+    |> Map.put(:properties, properties)
+    |> Map.put(:archived, archived)
+
+    patch("pages/#{page_id}", body_params)
+  end
 end

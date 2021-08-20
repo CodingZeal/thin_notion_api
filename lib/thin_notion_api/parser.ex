@@ -3,11 +3,10 @@ defmodule ThinNotionApi.Parser do
   Generic parser to parse api response
   """
 
-  @type status_code :: integer
   @type headers :: map
   @type response ::
           {:ok, struct}
-          | {:error, map, status_code}
+          | {:error, map}
           | any
 
   @doc """
@@ -20,8 +19,8 @@ defmodule ThinNotionApi.Parser do
 
   def parse({:error, %HTTPoison.Error{id: _, reason: reason}}), do: {:error, %{reason: reason}}
 
-  def parse({:ok, %HTTPoison.Response{body: body, headers: _, status_code: status}}),
-    do: {:error, parse_response_body(body), status}
+  def parse({:ok, %HTTPoison.Response{body: body, headers: _}}),
+    do: {:error, parse_response_body(body)}
 
   def parse(response), do: response
 
