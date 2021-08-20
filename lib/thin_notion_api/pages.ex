@@ -48,20 +48,28 @@ defmodule ThinNotionApi.Pages do
     get("pages/#{page_id}")
   end
 
-  def create_page(type, parent_id, properties \\ %{}, children \\ [])
-  def create_page(:page, parent_id, properties, children) do
-    body_params = %{}
-    |> Properties.set_page_parent(parent_id)
-    |> Map.put(:properties, properties)
-    |> Map.put(:childern, children)
-
-    post("pages", body_params)
-  end
-
   @doc """
-  Create a page inside of a database.
+  Create a page with a page or database as its parent type.
 
   ## Examples:
+      iex> ThinNotionApi.Pages.create_page(:page, "9b4a624d5a18482ab2187e54166edda7")
+      {:ok,
+      %{
+        "archived" => false,
+        "created_time" => "2021-08-20T20:16:00.000Z",
+        "id" => "7418966f-ca3c-4f44-bf58-7e5f56f4fcd2",
+        "last_edited_time" => "2021-08-20T20:16:00.000Z",
+        "object" => "page",
+        "parent" => %{
+          "page_id" => "9b4a624d-5a18-482a-b218-7e54166edda7",
+          "type" => "page_id"
+        },
+        "properties" => %{
+          "title" => %{"id" => "title", "title" => [], "type" => "title"}
+        },
+        "url" => "https://www.notion.so/7418966fca3c4f44bf587e5f56f4fcd2"
+      }}
+
       iex> ThinNotionApi.Pages.create_page(:database, "ee90be7f3fd14fd5961ef4203c7d9a81", %{ "title": %{ "title": [%{ "type": "text", "text": %{ "content": "Create Page Database" } }] } })
       {:ok,
         %{
@@ -100,6 +108,16 @@ defmodule ThinNotionApi.Pages do
         }
       }
   """
+  def create_page(type, parent_id, properties \\ %{}, children \\ [])
+  def create_page(:page, parent_id, properties, children) do
+    body_params = %{}
+    |> Properties.set_page_parent(parent_id)
+    |> Map.put(:properties, properties)
+    |> Map.put(:childern, children)
+
+    post("pages", body_params)
+  end
+
   def create_page(:database, parent_id, properties, children) do
     body_params = %{}
     |> Properties.set_database_parent(parent_id)
