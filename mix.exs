@@ -4,11 +4,9 @@ defmodule ThinNotionApi.MixProject do
   def project do
     [
       app: :thin_notion_api,
-      name: "Thin Notion API",
-      description: "Thin API wrapper for the Notion API",
-      licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/CodingZeal/thin_notion_api"},
       version: "0.0.1",
+      package: package(),
+      description: description(),
       source_url: "https://github.com/CodingZeal/thin_notion_api",
       elixir: "~> 1.11",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -42,6 +40,18 @@ defmodule ThinNotionApi.MixProject do
       {:httpoison, "~> 1.8"},
       {:jason, "~> 1.2"},
       {:mix_test_interactive, "~> 1.0", ony: [:dev, :test]}
+    ]
+  end
+
+  defp description() do
+    "Thin API wrapper for the Notion API."
+  end
+
+  defp package() do
+    [
+      name: "Thin Notion API",
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/CodingZeal/thin_notion_api"}
     ]
   end
 end
