@@ -7,8 +7,4 @@ defmodule ThinNotionApiTest do
   end
 
   doctest ThinNotionApi
-
-  test "greets the world" do
-    assert ThinNotionApi.hello() == :world
-  end
 end

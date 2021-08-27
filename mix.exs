@@ -39,7 +39,7 @@ defmodule ThinNotionApi.MixProject do
       {:exvcr, "~> 0.13", only: :test},
       {:httpoison, "~> 1.8"},
       {:jason, "~> 1.2"},
-      {:mix_test_interactive, "~> 1.0", ony: [:dev, :test]}
+      {:mix_test_interactive, "~> 1.0", only: :dev, runtime: false}
     ]
   end
 
