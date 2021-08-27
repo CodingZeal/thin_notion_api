@@ -207,7 +207,7 @@ defmodule ThinNotionApi.Databases do
         }
       }
   """
-  @spec create_database!(String.to_atom(), String.t(), map()) :: any
+  @spec create_database!(atom(), String.t(), map()) :: any
   def create_database!(parent_id, title, properties \\ %{
     Name: %{
       title: %{}
