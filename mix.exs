@@ -49,7 +49,6 @@ defmodule ThinNotionApi.MixProject do
 
   defp package() do
     [
-      name: "Thin Notion API",
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/CodingZeal/thin_notion_api"}
     ]
