@@ -37,7 +37,7 @@ defmodule ThinNotionApi.PagesTest do
 
   test "POST create_page of parent type database with non-valid parent_id" do
     use_cassette "post_create_page_type_page_error_parent_id" do
-      {:error, response} = Pages.create_page(:database, "9b4a624d5a18482ab2187e54166edda7", %{ "title": %{ "title": [%{ "type": "text", "text": %{ "content": "Create Page Database" } }] } })
+      {:error, response} = Pages.create_page(:database, "9b4a624d5a18482ab2187e54166edda7", %{ title: %{ title: [%{ type: "text", text: %{ content: "Create Page Database" } }] } })
 
       assert response["code"] == "object_not_found"
     end
@@ -45,7 +45,7 @@ defmodule ThinNotionApi.PagesTest do
 
   test "POST create_page of parent type database" do
     use_cassette "post_create_page_type_database" do
-      {:ok, response} = Pages.create_page(:database, "ee90be7f3fd14fd5961ef4203c7d9a81", %{ "title": %{ "title": [%{ "type": "text", "text": %{ "content": "Create Page Database" } }] } })
+      {:ok, response} = Pages.create_page(:database, "ee90be7f3fd14fd5961ef4203c7d9a81", %{ title: %{ title: [%{ type: "text", text: %{ content: "Create Page Database" } }] } })
       assert Map.keys(response) == ["archived", "created_time", "id", "last_edited_time", "object", "parent", "properties", "url"]
       assert get_in(response, ["parent", "type"]) == "database_id"
       assert NotionTestHelpers.get_in_undasherized(response, ["parent", "database_id"]) == "ee90be7f3fd14fd5961ef4203c7d9a81"
