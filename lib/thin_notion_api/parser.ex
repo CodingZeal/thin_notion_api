@@ -1,7 +1,5 @@
 defmodule ThinNotionApi.Parser do
-  @moduledoc """
-  Generic parser to parse api response
-  """
+  @moduledoc false
 
   @type headers :: map
   @type response ::

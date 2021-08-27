@@ -23,7 +23,7 @@ defmodule ThinNotionApi.Properties do
   end
 
   def set_database_properties(map, properties) do
-    case Map.values(properties) |> Enum.any?(fn (value) -> Map.has_key?(value, :title) end) do
+    case Enum.any?(Map.values(properties), fn (value) -> Map.has_key?(value, :title) end) do
       true ->
         Map.put(map, :properties, properties)
       _ ->

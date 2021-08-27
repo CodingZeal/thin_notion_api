@@ -30,16 +30,16 @@ defmodule ThinNotionApi.DatabasesTest do
       {:ok, response} = Databases.query_database("a4ef92b2a7984bae82114817678cd2f4")
       assert Map.get(response, "object") == "list"
       assert Map.keys(response) == ["has_more", "next_cursor", "object", "results"]
-      assert Map.get(response, "results") |> Enum.count() == 3
+      assert Enum.count(Map.get(response, "results")) == 3
     end
   end
 
   test "POST query_database with params" do
     use_cassette "post_query_database_with_params" do
-      {:ok, response} = Databases.query_database("a4ef92b2a7984bae82114817678cd2f4", %{ "page_size" => 1})
+      {:ok, response} = Databases.query_database("a4ef92b2a7984bae82114817678cd2f4", %{"page_size" => 1})
       assert Map.get(response, "object") == "list"
       assert Map.keys(response) == ["has_more", "next_cursor", "object", "results"]
-      assert Map.get(response, "results") |> Enum.count() == 1
+      assert Enum.count(Map.get(response, "results")) == 1
     end
   end
 

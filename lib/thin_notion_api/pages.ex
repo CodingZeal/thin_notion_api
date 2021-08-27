@@ -1,4 +1,7 @@
 defmodule ThinNotionApi.Pages do
+  @moduledoc """
+  Module for interacting with the Notion pages.
+  """
   import ThinNotionApi.Base
   alias ThinNotionApi.Properties
 
