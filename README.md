@@ -5,18 +5,6 @@
 ThinNotionApi is an Elixir package to easily communicate with the Notion API.
 The main objective to provide a simple straight forward way for a person to fetch or update information without a large or complex interface.
 
-
-
-TODO:
-
-- [x] Need to start adding tests
-- [x] List database query param support
-- [x] Query database with options
-- [x] Support all Page object actions
-- [ ] Support all Block actions
-- [ ] Support all User actions
-- [ ] Support Search
-
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
@@ -30,7 +18,49 @@ def deps do
 end
 ```
 
+Add your app’s consumer_key and consumer_secret to config/config.exs:
+
+```elixir
+config :thin_notion_api, :api_key, System.get_env("NOTION_API_KEY")
+config :thin_notion_api, :notion_version, System.get_env("NOTION_VERSION")
+```
+
+## Usage
+
+Retrieve information about a Notion database
+```elixir
+iex> ThinNotionApi.Databases.retrieve_database(database_id)
+{
+  :ok,
+  %{...}
+}
+```
+
+Retrieves a Page object using the ID specified.
+Responses contains page properties, not page content. To fetch page content, use the retrieve block children endpoint.
+
+```elixir
+iex> ThinNotionApi.Pages.retrieve_page(page_id)
+{
+  :ok,
+  %{...}
+}
+```
+
+Find all modules and functions you can use in the [API Reference section](https://hexdocs.pm/thin_notion_api/api-reference.html).
+
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/thin_notion_api](https://hexdocs.pm/thin_notion_api).
 
+## Development Progress
+
+TODO:
+
+- [x] Need to start adding tests
+- [x] List database query param support
+- [x] Query database with options
+- [x] Support all Page object actions
+- [ ] Support all Block actions
+- [ ] Support all User actions
+- [ ] Support Search
