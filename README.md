@@ -18,12 +18,16 @@ def deps do
 end
 ```
 
-Add your app’s consumer_key and consumer_secret to config/config.exs:
+Next log in to the [Notion Developers](https://developers.notion.com/) site. Visit [My Integrations](https://www.notion.so/my-integrations) and create `New Integration`. After creating your integration, you should now have a `Internal Integration Token` you will use for all your Notion API requests. Make sure to keep this secret private and never leak it because at the moment you cannot regenerate a new one if compromised.
+
+Add your integration token and which [Version of the Notion API](https://developers.notion.com/reference/versioning) you are using (if not provided, it will default to `2021-08-16`) to config/config.exs:
 
 ```elixir
 config :thin_notion_api, :api_key, System.get_env("NOTION_API_KEY")
 config :thin_notion_api, :notion_version, System.get_env("NOTION_VERSION")
 ```
+
+You are good to go.
 
 ## Usage
 
