@@ -4,7 +4,7 @@ defmodule ThinNotionApi.Utils do
   def api_key, do: Application.get_env(:thin_notion_api, :api_key)
 
   def notion_version,
-    do: Application.get_env(:thin_notion_api, :notion_version, "2021-05-13")
+    do: Application.get_env(:thin_notion_api, :notion_version, "2021-08-16")
 
   def auth_header do
     key = if Mix.env() == :test do

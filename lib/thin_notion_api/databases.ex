@@ -53,21 +53,6 @@ defmodule ThinNotionApi.Databases do
   end
 
   @doc """
-  List all Databases shared with the authenticated integration. The response may contain fewer than page_size of results.
-
-  > Use search pages for more details.
-
-  > This endpoint is no longer recommended, use search instead. This endpoint will only return explicitly shared pages, while search will also return child pages within explicitly shared pages. This endpoint's results cannot be filtered, while search can be used to match on page title.
-
-  ## Examples:
-      iex> ThinNotionApi.Databases.list_databases(query_params)
-
-  """
-  def list_databases(query_params \\ %{}) do
-    get("databases", query_params)
-  end
-
-  @doc """
   Gets a list of Pages contained in the database, filtered and ordered according to the filter conditions and sort criteria provided in the request. The response may contain fewer than page_size of results.
 
   ## Examples:
@@ -219,6 +204,18 @@ defmodule ThinNotionApi.Databases do
     |> Properties.set_database_properties(properties)
 
     post("databases", body_params)
+  end
+
+  def update_database!(database_id, title, properties \\ %{
+    Name: %{
+      title: %{}
+    },
+  }) do
+    body_params = %{}
+    |> Properties.set_title(title)
+    |> Properties.set_database_properties(properties)
+
+    patch("databases/#{database_id}", body_params)
   end
 
   defp set_parent(map, parent_id) do
