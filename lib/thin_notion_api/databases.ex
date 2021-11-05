@@ -206,6 +206,9 @@ defmodule ThinNotionApi.Databases do
     post("databases", body_params)
   end
 
+  @doc """
+  Updates an existing database as specified by the parameters.
+  """
   def update_database!(database_id, title, properties \\ %{
     Name: %{
       title: %{}

@@ -84,4 +84,13 @@ defmodule ThinNotionApi.PagesTest do
       assert get_in(response, ["code"]) == "validation_error"
     end
   end
+
+  test "GET retrieve_page_property_item successfully" do
+    use_cassette "get_retrieve_page_property_item " do
+      {:ok, response} = Pages.retrieve_page_property_item("9b4a624d5a18482ab2187e54166edda7", "title")
+
+      assert get_in(response, ["object"]) == "list"
+      assert get_in(response, ["results"]) |> Enum.at(0) |> get_in(["title", "plain_text"]) == "Thin Notion Test Workspace"
+    end
+  end
 end

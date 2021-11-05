@@ -189,4 +189,11 @@ defmodule ThinNotionApi.Pages do
 
     patch("pages/#{page_id}", body_params)
   end
+
+  @doc """
+  Retrieves a property_item object for a given page_id and property_id. Depending on the property type, the object returned will either be a value or a paginated list of property item values.
+  """
+  def retrieve_page_property_item(page_id, property_id) do
+    get("pages/#{page_id}/properties/#{property_id}")
+  end
 end
