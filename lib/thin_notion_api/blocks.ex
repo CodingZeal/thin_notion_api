@@ -6,7 +6,6 @@ defmodule ThinNotionApi.Blocks do
   """
 
   import ThinNotionApi.Base
-  alias ThinNotionApi.Properties
 
   @doc """
   Retrieves a Block object using the ID specified.
@@ -19,11 +18,25 @@ defmodule ThinNotionApi.Blocks do
     get("blocks/" <> block_id)
   end
 
+  @doc """
+  Returns a paginated array of child block objects contained in the block using the ID specified. In order to receive a complete representation of a block, you may need to recursively retrieve the block children of child blocks.
+
+  🚧 Returns only the first level of children for the specified block. See block objects for more detail on determining if that block has nested children.
+
+  The response may contain fewer than page_size of results.
+
+  See Pagination for details about how to use a cursor to iterate through the list.
+  """
   @spec retrieve_block_children(String.t(), %{ start_cursor: String.t(), page_size: Integer.t() }) :: any
   def retrieve_block_children(block_id, params \\ %{}) do
     get("blocks/" <> block_id <> "/children", params)
   end
 
+  @doc """
+  Updates the content for the specified block_id based on the block type. Supported fields based on the block object type (see Block object for available fields and the expected input for each field).
+
+  Note: The update replaces the entire value for a given field. If a field is omitted (ex: omitting checked when updating a to_do block), the value will not be changed.
+  """
   @spec update_block(binary, any) :: any
   def update_block(block_id, body_params) do
     patch("blocks/" <> block_id, body_params)
@@ -44,6 +57,7 @@ defmodule ThinNotionApi.Blocks do
 
   To restore the block with the API, use the Update a block or Update page respectively.
   """
+  @spec delete_block(String.t()) :: any
   def delete_block(block_id) do
     delete("blocks/" <> block_id)
   end
