@@ -3,7 +3,6 @@ defmodule ThinNotionApi.BlocksTest do
   use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
 
   alias ThinNotionApi.Blocks
-  alias ThinNotionApi.NotionTestHelpers
 
   setup_all do
     HTTPoison.start
@@ -80,7 +79,7 @@ defmodule ThinNotionApi.BlocksTest do
         }
       }]
 
-      {:ok, response} = Blocks.append_block_cildren("9b4a624d5a18482ab2187e54166edda7", children)
+      {:ok, _response} = Blocks.append_block_cildren("9b4a624d5a18482ab2187e54166edda7", children)
 
       # API right now isnt returning the children, so we have to do this
       {:ok, response} = Blocks.retrieve_block_children("9b4a624d5a18482ab2187e54166edda7")
