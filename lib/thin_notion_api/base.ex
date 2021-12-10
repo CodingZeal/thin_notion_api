@@ -31,6 +31,13 @@ defmodule ThinNotionApi.Base do
     |> Parser.parse()
   end
 
+  def delete(path_arg) do
+    path_arg
+    |> build_url()
+    |> HTTPoison.delete(post_request_headers())
+    |> Parser.parse()
+  end
+
   defp build_url(path_arg, query_params \\ %{}) do
     query_params = process_params(query_params)
 
