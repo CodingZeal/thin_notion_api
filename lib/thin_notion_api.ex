@@ -1,8 +1,6 @@
 defmodule ThinNotionApi do
   @moduledoc """
-  Documentation for `ThinNotionApi`.
-
-  A thin wrapper for the Notion API
+  Functions not specific to any particular model in the Notion API. Such as search.
   """
 
   import ThinNotionApi.Base

@@ -65,6 +65,14 @@ TODO:
 - [x] List database query param support
 - [x] Query database with options
 - [x] Support all Page object actions
-- [ ] Support all Block actions
+- [x] Support all Block actions
 - [ ] Support all User actions
-- [ ] Support Search
+- [x] Support Search
+
+## Release Process
+
+To generate documentation
+```
+mix docs
+```
+

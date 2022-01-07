@@ -1,12 +1,12 @@
 defmodule ThinNotionApi.Types.SearchParams do
   @moduledoc """
-  Keys for the search API.
+  Parameters for using the search API.
   """
 
   @type t :: %__MODULE__{
     query: String.t(),
-    sort: ThinNotionApi.Types.Sort.t(),
-    filter: ThinNotionApi.Types.Filter.t(),
+    sort: ThinNotionApi.Types.SearchSortParams.t(),
+    filter: ThinNotionApi.Types.SearchFilterParams.t(),
     start_cursor: String.t(),
     page_size: integer()
   }

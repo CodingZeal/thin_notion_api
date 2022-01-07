@@ -1,6 +1,6 @@
-defmodule ThinNotionApi.Types.FilterParams do
+defmodule ThinNotionApi.Types.SearchFilterParams do
   @moduledoc """
-  Options for the filtering results
+  Parameters for the filtering search results.
   """
 
   @type t :: %__MODULE__{

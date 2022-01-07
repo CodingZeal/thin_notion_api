@@ -1,6 +1,6 @@
-defmodule ThinNotionApi.Types.SortParams do
+defmodule ThinNotionApi.Types.SearchSortParams do
   @moduledoc """
-  Options for the sorting results
+  Parameter options for the sorting the search results
   """
 
   @type t :: %__MODULE__{

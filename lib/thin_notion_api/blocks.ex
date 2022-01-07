@@ -2,11 +2,12 @@ defmodule ThinNotionApi.Blocks do
   @moduledoc """
   This module contains functions to interact and modify Notion blocks.
 
-  A block object represents content within Notion. Blocks can be text, lists, media, and more. A page is a type of block, too!
+  A block object represents content within Notion. Blocks can be text, lists, media, and more.
   """
 
   import ThinNotionApi.Base
 
+  @spec retrieve_block(String.t()) :: {:ok, map()} | {:error, any()}
   @doc """
   Retrieves a Block object using the ID specified.
 
@@ -26,8 +27,12 @@ defmodule ThinNotionApi.Blocks do
   The response may contain fewer than page_size of results.
 
   See Pagination for details about how to use a cursor to iterate through the list.
+
+  iex> ThinNotionApi.Blocks.retrieve_block_children("9b4a624d5a18482ab2187e54166edda7")
+
+  {:ok, %{...}}
   """
-  @spec retrieve_block_children(String.t(), %{ start_cursor: String.t(), page_size: Integer.t() }) :: any
+  @spec retrieve_block_children(String.t(), %{ start_cursor: String.t(), page_size: Integer.t() } | %{}) :: {:ok, map()} | {:error, any()}
   def retrieve_block_children(block_id, params \\ %{}) do
     get("blocks/" <> block_id <> "/children", params)
   end
@@ -36,17 +41,45 @@ defmodule ThinNotionApi.Blocks do
   Updates the content for the specified block_id based on the block type. Supported fields based on the block object type (see Block object for available fields and the expected input for each field).
 
   Note: The update replaces the entire value for a given field. If a field is omitted (ex: omitting checked when updating a to_do block), the value will not be changed.
+
+  iex> ThinNotionApi.Blocks.update_block("c4c027f4ea7c41c5908d63a7f5a9c32c", %{
+        paragraph: %{
+          text: [%{
+            type: "text",
+            text: %{
+              content: "Hello DOGE!",
+            }
+          }],
+        }
+      })
+
+  {:ok, %{...}}
   """
-  @spec update_block(binary, any) :: any
+  @spec update_block(String.t(), %{ archived: boolean()} | map()) :: {:ok, map()} | {:error, any()}
   def update_block(block_id, body_params) do
     patch("blocks/" <> block_id, body_params)
   end
 
-  @spec append_block_cildren(String.t(), list()) :: any
+  @spec append_block_cildren(String.t(), list(map())) :: {:ok, map()} | {:error, any()}
   @doc """
   Creates and appends new children blocks to the parent block_id specified.
 
   Returns a paginated list of newly created first level children block objects.
+
+  iex> ThinNotionApi.Blocks.update_block("c4c027f4ea7c41c5908d63a7f5a9c32c", [%{
+        object: "block",
+        type: "paragraph",
+        paragraph: %{
+          text: [%{
+            type: "text",
+            text: %{
+              content: "Testing for append_block_children",
+            }
+          }]
+        }
+      }])
+
+  {:ok, %{...}}
   """
   def append_block_cildren(block_id, children) do
     patch("blocks/" <> block_id <> "/children", %{ children: children })
@@ -56,8 +89,12 @@ defmodule ThinNotionApi.Blocks do
   Sets a Block object, including page blocks, to archived: true using the ID specified. Note: in the Notion UI application, this moves the block to the "Trash" where it can still be accessed and restored.
 
   To restore the block with the API, use the Update a block or Update page respectively.
+
+  iex> ThinNotionApi.Blocks.retrieve_block_children("9b4a624d5a18482ab2187e54166edda7")
+
+  {:ok, %{...}}
   """
-  @spec delete_block(String.t()) :: any
+  @spec delete_block(String.t()) :: {:ok, map()} | {:error, any()}
   def delete_block(block_id) do
     delete("blocks/" <> block_id)
   end
