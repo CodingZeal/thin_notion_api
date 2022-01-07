@@ -11,9 +11,11 @@ defmodule ThinNotionApi.Blocks do
   @doc """
   Retrieves a Block object using the ID specified.
 
-  iex> ThinNotionApi.Blocks.retrieve_block(block_id)
+  ## Examples:
 
-  {:ok, %{...}}
+      iex> ThinNotionApi.Blocks.retrieve_block(block_id)
+
+      {:ok, %{...}}
   """
   def retrieve_block(block_id) do
     get("blocks/" <> block_id)
@@ -28,9 +30,11 @@ defmodule ThinNotionApi.Blocks do
 
   See Pagination for details about how to use a cursor to iterate through the list.
 
-  iex> ThinNotionApi.Blocks.retrieve_block_children("9b4a624d5a18482ab2187e54166edda7")
+  ## Examples:
 
-  {:ok, %{...}}
+      iex> ThinNotionApi.Blocks.retrieve_block_children("9b4a624d5a18482ab2187e54166edda7")
+
+      {:ok, %{...}}
   """
   @spec retrieve_block_children(String.t(), %{ start_cursor: String.t(), page_size: Integer.t() } | %{}) :: {:ok, map()} | {:error, any()}
   def retrieve_block_children(block_id, params \\ %{}) do
@@ -42,46 +46,50 @@ defmodule ThinNotionApi.Blocks do
 
   Note: The update replaces the entire value for a given field. If a field is omitted (ex: omitting checked when updating a to_do block), the value will not be changed.
 
-  iex> ThinNotionApi.Blocks.update_block("c4c027f4ea7c41c5908d63a7f5a9c32c", %{
-        paragraph: %{
-          text: [%{
-            type: "text",
-            text: %{
-              content: "Hello DOGE!",
-            }
-          }],
-        }
-      })
+  ## Examples:
 
-  {:ok, %{...}}
+      iex> ThinNotionApi.Blocks.update_block("c4c027f4ea7c41c5908d63a7f5a9c32c", %{
+            paragraph: %{
+              text: [%{
+                type: "text",
+                text: %{
+                  content: "Hello DOGE!",
+                }
+              }],
+            }
+          })
+
+      {:ok, %{...}}
   """
   @spec update_block(String.t(), %{ archived: boolean()} | map()) :: {:ok, map()} | {:error, any()}
   def update_block(block_id, body_params) do
     patch("blocks/" <> block_id, body_params)
   end
 
-  @spec append_block_cildren(String.t(), list(map())) :: {:ok, map()} | {:error, any()}
+  @spec append_block_children(String.t(), list(map())) :: {:ok, map()} | {:error, any()}
   @doc """
   Creates and appends new children blocks to the parent block_id specified.
 
   Returns a paginated list of newly created first level children block objects.
 
-  iex> ThinNotionApi.Blocks.update_block("c4c027f4ea7c41c5908d63a7f5a9c32c", [%{
-        object: "block",
-        type: "paragraph",
-        paragraph: %{
-          text: [%{
-            type: "text",
-            text: %{
-              content: "Testing for append_block_children",
-            }
-          }]
-        }
-      }])
+  ## Examples:
 
-  {:ok, %{...}}
+      iex> ThinNotionApi.Blocks.append_block_children("c4c027f4ea7c41c5908d63a7f5a9c32c", [%{
+            object: "block",
+            type: "paragraph",
+            paragraph: %{
+              text: [%{
+                type: "text",
+                text: %{
+                  content: "Testing for append_block_children",
+                }
+              }]
+            }
+          }])
+
+      {:ok, %{...}}
   """
-  def append_block_cildren(block_id, children) do
+  def append_block_children(block_id, children) do
     patch("blocks/" <> block_id <> "/children", %{ children: children })
   end
 
@@ -90,9 +98,11 @@ defmodule ThinNotionApi.Blocks do
 
   To restore the block with the API, use the Update a block or Update page respectively.
 
-  iex> ThinNotionApi.Blocks.retrieve_block_children("9b4a624d5a18482ab2187e54166edda7")
+  ## Examples:
 
-  {:ok, %{...}}
+      iex> ThinNotionApi.Blocks.delete_block("9b4a624d5a18482ab2187e54166edda7")
+
+      {:ok, %{...}}
   """
   @spec delete_block(String.t()) :: {:ok, map()} | {:error, any()}
   def delete_block(block_id) do
