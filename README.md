@@ -11,7 +11,7 @@ by adding `thin_notion_api` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:thin_notion_api, "~> 0.0.1"}
+    {:thin_notion_api, "~> 1.0.0"}
   ]
 end
 ```
