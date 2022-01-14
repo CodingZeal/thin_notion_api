@@ -66,13 +66,24 @@ TODO:
 - [x] Query database with options
 - [x] Support all Page object actions
 - [x] Support all Block actions
-- [ ] Support all User actions
+- [x] Support all User actions
 - [x] Support Search
 
 ## Release Process
 
-To generate documentation
+Validate documentation by generating using following command
 ```
 mix docs
 ```
 
+You can spin up a quick web server to host documentation if you have node installed by using the following command:
+```
+npx http-serve doc
+```
+
+Ensure version in the `mix.exs` has been properly incremented.
+
+If everything looks good, you can release by running.
+```
+mix hex.publish
+```

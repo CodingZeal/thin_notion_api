@@ -4,7 +4,7 @@ defmodule ThinNotionApi.MixProject do
   def project do
     [
       app: :thin_notion_api,
-      version: "0.1.0",
+      version: "1.0.0",
       package: package(),
       description: description(),
       source_url: "https://github.com/CodingZeal/thin_notion_api",
