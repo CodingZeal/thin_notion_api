@@ -3,7 +3,7 @@ defmodule ThinNotionApi.Pages do
   Module for interacting with the Notion pages.
   """
   import ThinNotionApi.Base
-  alias ThinNotionApi.Properties
+  alias ThinNotionApi.{Properties, Types}
 
   @doc """
   Retrieves a Page object using the ID specified.
@@ -12,41 +12,9 @@ defmodule ThinNotionApi.Pages do
 
   ## Examples:
       iex> ThinNotionApi.Pages.retrieve_page("9b4a624d5a18482ab2187e54166edda7")
-      {:ok,
-        %{
-          "archived" => false,
-          "created_time" => "2021-06-11T20:34:00.000Z",
-          "id" => "9b4a624d-5a18-482a-b218-7e54166edda7",
-          "last_edited_time" => "2021-07-30T21:03:00.000Z",
-          "object" => "page",
-          "parent" => %{"type" => "workspace", "workspace" => true},
-          "properties" => %{
-            "title" => %{
-              "id" => "title",
-              "title" => [
-                %{
-                  "annotations" => %{
-                    "bold" => false,
-                    "code" => false,
-                    "color" => "default",
-                    "italic" => false,
-                    "strikethrough" => false,
-                    "underline" => false
-                  },
-                  "href" => nil,
-                  "plain_text" => "Thin Notion Test Workspace",
-                  "text" => %{"content" => "Thin Notion Test Workspace", "link" => nil},
-                  "type" => "text"
-                }
-              ],
-              "type" => "title"
-            }
-          },
-          "url" => "https://www.notion.so/Thin-Notion-Test-Workspace-9b4a624d5a18482ab2187e54166edda7"
-        }
-      }
+      {:ok, %{...}}
   """
-  @spec retrieve_page(String.t()) :: map()
+  @spec retrieve_page(String.t()) :: Types.Response.response()
   def retrieve_page(page_id) do
     get("pages/#{page_id}")
   end
@@ -54,63 +22,20 @@ defmodule ThinNotionApi.Pages do
   @doc """
   Create a page with a page or database as its parent type.
 
+  If the parent is a database, the property values of the new page in the properties parameter must conform to the parent database's property schema.
+
+  If the parent is a page, the only valid property is title.
+
+  When creating a Database you must specify a title property.
+
   ## Examples:
       iex> ThinNotionApi.Pages.create_page(:page, "9b4a624d5a18482ab2187e54166edda7")
-      {:ok,
-      %{
-        "archived" => false,
-        "created_time" => "2021-08-20T20:16:00.000Z",
-        "id" => "7418966f-ca3c-4f44-bf58-7e5f56f4fcd2",
-        "last_edited_time" => "2021-08-20T20:16:00.000Z",
-        "object" => "page",
-        "parent" => %{
-          "page_id" => "9b4a624d-5a18-482a-b218-7e54166edda7",
-          "type" => "page_id"
-        },
-        "properties" => %{
-          "title" => %{"id" => "title", "title" => [], "type" => "title"}
-        },
-        "url" => "https://www.notion.so/7418966fca3c4f44bf587e5f56f4fcd2"
-      }}
+      {:ok, %{...}}
 
       iex> ThinNotionApi.Pages.create_page(:database, "ee90be7f3fd14fd5961ef4203c7d9a81", %{ "title": %{ "title": [%{ "type": "text", "text": %{ "content": "Create Page Database" } }] } })
-      {:ok,
-        %{
-          "archived" => false,
-          "created_time" => "2021-08-13T21:50:00.000Z",
-          "id" => "f96939de-e0a4-4175-a3ae-da8ee7512432",
-          "last_edited_time" => "2021-08-13T21:50:00.000Z",
-          "object" => "page",
-          "parent" => %{
-            "database_id" => "ee90be7f-3fd1-4fd5-961e-f4203c7d9a81",
-            "type" => "database_id"
-          },
-          "properties" => %{
-            "Name" => %{
-              "id" => "title",
-              "title" => [
-                %{
-                  "annotations" => %{
-                    "bold" => false,
-                    "code" => false,
-                    "color" => "default",
-                    "italic" => false,
-                    "strikethrough" => false,
-                    "underline" => false
-                  },
-                  "href" => nil,
-                  "plain_text" => "Create Page Database",
-                  "text" => %{"content" => "Create Page Database", "link" => nil},
-                  "type" => "text"
-                }
-              ],
-              "type" => "title"
-            }
-          },
-          "url" => "https://www.notion.so/Create-Page-Database-f96939dee0a44175a3aeda8ee7512432"
-        }
-      }
+      {:ok, %{...}}
   """
+  @spec create_page(:database | :page, String.t(), map() | nil) :: Types.Response.response()
   def create_page(type, parent_id, properties \\ %{}, children \\ [])
   def create_page(:page, parent_id, properties, children) do
     body_params = %{}
@@ -141,46 +66,9 @@ defmodule ThinNotionApi.Pages do
 
   ## Examples:
       iex>  ThinNotionApi.Pages.update_page("c8445875c2cc424eb9eacba94cac667d", properties, false)
-      {:ok,
-      %{
-        "archived" => false,
-        "created_time" => "2021-08-20T20:26:00.000Z",
-        "id" => "c8445875-c2cc-424e-b9ea-cba94cac667d",
-        "last_edited_time" => "2021-08-20T21:07:00.000Z",
-        "object" => "page",
-        "parent" => %{
-          "page_id" => "9b4a624d-5a18-482a-b218-7e54166edda7",
-          "type" => "page_id"
-        },
-        "properties" => %{
-          "title" => %{
-            "id" => "title",
-            "title" => [
-              %{
-                "annotations" => %{
-                  "bold" => false,
-                  "code" => false,
-                  "color" => "default",
-                  "italic" => false,
-                  "strikethrough" => false,
-                  "underline" => false
-                },
-                "href" => nil,
-                "plain_text" => "Test: Used for updating page test",
-                "text" => %{
-                  "content" => "Test: Used for updating page test",
-                  "link" => nil
-                },
-                "type" => "text"
-              }
-            ],
-            "type" => "title"
-          }
-        },
-        "url" => "https://www.notion.so/Test-Used-for-updating-page-test-c8445875c2cc424eb9eacba94cac667d"
-      }}
+      {:ok, %{...}}
   """
-  @spec update_page(String.t(), map(), boolean()) :: map()
+  @spec update_page(String.t(), map() | nil, boolean() | nil) :: Types.Response.response()
   def update_page(page_id, properties \\ %{}, archived \\ false) do
 
     body_params = %{}
@@ -190,10 +78,15 @@ defmodule ThinNotionApi.Pages do
     patch("pages/#{page_id}", body_params)
   end
 
+  @spec retrieve_page_property_item(String.t(), String.t(), Types.PaginationParams.t() | %{}) :: Types.Response.response()
   @doc """
   Retrieves a property_item object for a given page_id and property_id. Depending on the property type, the object returned will either be a value or a paginated list of property item values.
+
+  ## Examples:
+      iex> ThinNotionApi.Pages.retrieve_page_property_item("c8445875c2cc424eb9eacba94cac667d", "title")
+      {:ok, %{...}}
   """
-  def retrieve_page_property_item(page_id, property_id) do
-    get("pages/#{page_id}/properties/#{property_id}")
+  def retrieve_page_property_item(page_id, property_id, params \\ %{}) do
+    get("pages/#{page_id}/properties/#{property_id}", params)
   end
 end
