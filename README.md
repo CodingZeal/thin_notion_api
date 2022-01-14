@@ -1,7 +1,5 @@
 # ThinNotionApi
 
-## This package is still under heavy development and things can change at any time.
-
 ThinNotionApi is an Elixir package to easily communicate with the Notion API.
 The main objective to provide a simple straight forward way for a person to fetch or update information without a large or complex interface.
 
