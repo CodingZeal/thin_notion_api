@@ -4,9 +4,9 @@ defmodule ThinNotionApi.Databases do
   """
 
   import ThinNotionApi.Base
-  alias ThinNotionApi.Properties
+  alias ThinNotionApi.{Properties, Types}
 
-  @spec retrieve_database(String.t()) :: {:ok, map()} | {:error, any()}
+  @spec retrieve_database(String.t()) :: Types.Response.response()
   @doc """
   Retrieves a Database object using the ID specified.
 
@@ -19,7 +19,7 @@ defmodule ThinNotionApi.Databases do
     get("databases/" <> database_id)
   end
 
-  @spec query_database(String.t(), ThinNotionApi.Types.DatabaseQueryParams | %{}) :: {:ok, map()} | {:error, any()}
+  @spec query_database(String.t(), Types.DatabaseQueryParams | %{}) :: Types.Response.response()
   @doc """
   Gets a list of Pages contained in the database, filtered and ordered according to the filter conditions and sort criteria provided in the request. The response may contain fewer than page_size of results.
 
@@ -43,21 +43,26 @@ defmodule ThinNotionApi.Databases do
       iex> ThinNotionApi.Databases.create_database!("9b4a624d5a18482ab2187e54166edda7", "New Database")
       {:ok, %{...}}
   """
-  @spec create_database!(String.t(), String.t(), map()) :: any
-  def create_database!(parent_id, title, properties \\ %{
-    Name: %{
-      title: %{}
-    },
-  }) do
-    body_params = %{}
-    |> set_parent(parent_id)
-    |> Properties.set_title(title)
-    |> Properties.set_database_properties(properties)
+  @spec create_database!(String.t(), String.t(), map()) :: Types.Response.response()
+  def create_database!(
+        parent_id,
+        title,
+        properties \\ %{
+          Name: %{
+            title: %{}
+          }
+        }
+      ) do
+    body_params =
+      %{}
+      |> set_parent(parent_id)
+      |> Properties.set_title(title)
+      |> Properties.set_database_properties(properties)
 
     post("databases", body_params)
   end
 
-  @spec update_database!(String.t(), String.t(), map()) :: any
+  @spec update_database!(String.t(), String.t(), map()) :: Types.Response.response()
   @doc """
   Updates an existing database as specified by the parameters.
 
@@ -66,14 +71,19 @@ defmodule ThinNotionApi.Databases do
       iex> ThinNotionApi.Databases.update_database!(database_id, "New New Database Name")
       {:ok, %{...}}
   """
-  def update_database!(database_id, title, properties \\ %{
-    Name: %{
-      title: %{}
-    },
-  }) do
-    body_params = %{}
-    |> Properties.set_title(title)
-    |> Properties.set_database_properties(properties)
+  def update_database!(
+        database_id,
+        title,
+        properties \\ %{
+          Name: %{
+            title: %{}
+          }
+        }
+      ) do
+    body_params =
+      %{}
+      |> Properties.set_title(title)
+      |> Properties.set_database_properties(properties)
 
     patch("databases/#{database_id}", body_params)
   end
