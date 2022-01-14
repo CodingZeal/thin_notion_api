@@ -1,5 +1,5 @@
 defmodule ThinNotionApi.Types.SearchFilterParams do
-  @moduledoc """
+  @typedoc """
   Parameters for the filtering search results.
   """
 

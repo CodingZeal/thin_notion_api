@@ -1,8 +1,7 @@
 defmodule ThinNotionApi.Types.DatabaseQueryParams do
-  @moduledoc """
+  @typedoc """
   Parameters for using the database query API.
   """
-
   @type t :: %__MODULE__{
     sort: ThinNotionApi.Types.DatabaseQuerySortParams.t(),
     filter: map(),

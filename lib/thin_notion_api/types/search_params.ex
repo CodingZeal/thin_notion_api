@@ -1,5 +1,5 @@
 defmodule ThinNotionApi.Types.SearchParams do
-  @moduledoc """
+  @typedoc """
   Parameters for using the search API.
   """
 

@@ -13,7 +13,7 @@ defmodule ThinNotionApi.Users do
       iex> ThinNotionApi.Users.retrieve_user("12345")
       {:ok, %{...}}
   """
-  @spec retrieve_user(String.t()) :: Types.Response.response()
+  @spec retrieve_user(String.t()) :: Types.Response.t()
   def retrieve_user(user_id) do
     get("users/" <> user_id)
   end
@@ -28,12 +28,12 @@ defmodule ThinNotionApi.Users do
 
       {:ok, %{...}}
   """
-  @spec list_all_users(Types.PaginationParams.t() | %{}) :: Types.Response.response()
+  @spec list_all_users(Types.PaginationParams.t() | %{}) :: Types.Response.t()
   def list_all_users(params \\ %{}) do
     get("users", params)
   end
 
-  @spec retrieve_user_bot :: Types.Response.response()
+  @spec retrieve_user_bot :: Types.Response.t()
   @doc """
   Retrieves the bot User associated with the API token provided in the authorization header. The bot will have an owner field with information about the person who authorized the integration.
 

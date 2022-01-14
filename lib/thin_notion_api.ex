@@ -11,9 +11,10 @@ defmodule ThinNotionApi do
   The filter parameter can be used to query specifically for only pages or only databases.
   The response may contain fewer than page_size of results. See Pagination for details about how to use a cursor to iterate through the list.
 
-  iex> ThinNotionApi.search(%{ query: "test", page_size: 10 })
+  ## Examples
+      iex> ThinNotionApi.search(%{ query: "test", page_size: 10 })
 
-  {:ok, %{...}}
+      {:ok, %{...}}
   """
   @spec search(ThinNotionApi.Types.SearchParams.t()) :: any
   def search(%ThinNotionApi.Types.SearchParams{} = search_params) do

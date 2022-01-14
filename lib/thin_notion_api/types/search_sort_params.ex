@@ -1,5 +1,5 @@
 defmodule ThinNotionApi.Types.SearchSortParams do
-  @moduledoc """
+  @typedoc """
   Parameter options for the sorting the search results
   """
 

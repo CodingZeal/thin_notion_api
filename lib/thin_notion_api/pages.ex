@@ -14,7 +14,7 @@ defmodule ThinNotionApi.Pages do
       iex> ThinNotionApi.Pages.retrieve_page("9b4a624d5a18482ab2187e54166edda7")
       {:ok, %{...}}
   """
-  @spec retrieve_page(String.t()) :: Types.Response.response()
+  @spec retrieve_page(String.t()) :: Types.Response.t()
   def retrieve_page(page_id) do
     get("pages/#{page_id}")
   end
@@ -35,7 +35,7 @@ defmodule ThinNotionApi.Pages do
       iex> ThinNotionApi.Pages.create_page(:database, "ee90be7f3fd14fd5961ef4203c7d9a81", %{ "title": %{ "title": [%{ "type": "text", "text": %{ "content": "Create Page Database" } }] } })
       {:ok, %{...}}
   """
-  @spec create_page(:database | :page, String.t(), map() | nil) :: Types.Response.response()
+  @spec create_page(:database | :page, String.t(), map() | nil) :: Types.Response.t()
   def create_page(type, parent_id, properties \\ %{}, children \\ [])
   def create_page(:page, parent_id, properties, children) do
     body_params = %{}
@@ -68,7 +68,7 @@ defmodule ThinNotionApi.Pages do
       iex>  ThinNotionApi.Pages.update_page("c8445875c2cc424eb9eacba94cac667d", properties, false)
       {:ok, %{...}}
   """
-  @spec update_page(String.t(), map() | nil, boolean() | nil) :: Types.Response.response()
+  @spec update_page(String.t(), map() | nil, boolean() | nil) :: Types.Response.t()
   def update_page(page_id, properties \\ %{}, archived \\ false) do
 
     body_params = %{}
@@ -78,7 +78,7 @@ defmodule ThinNotionApi.Pages do
     patch("pages/#{page_id}", body_params)
   end
 
-  @spec retrieve_page_property_item(String.t(), String.t(), Types.PaginationParams.t() | %{}) :: Types.Response.response()
+  @spec retrieve_page_property_item(String.t(), String.t(), Types.PaginationParams.t() | %{}) :: Types.Response.t()
   @doc """
   Retrieves a property_item object for a given page_id and property_id. Depending on the property type, the object returned will either be a value or a paginated list of property item values.
 

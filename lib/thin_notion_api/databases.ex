@@ -6,7 +6,7 @@ defmodule ThinNotionApi.Databases do
   import ThinNotionApi.Base
   alias ThinNotionApi.{Properties, Types}
 
-  @spec retrieve_database(String.t()) :: Types.Response.response()
+  @spec retrieve_database(String.t()) :: Types.Response.t()
   @doc """
   Retrieves a Database object using the ID specified.
 
@@ -19,7 +19,7 @@ defmodule ThinNotionApi.Databases do
     get("databases/" <> database_id)
   end
 
-  @spec query_database(String.t(), Types.DatabaseQueryParams | %{}) :: Types.Response.response()
+  @spec query_database(String.t(), Types.DatabaseQueryParams.t() | %{}) :: Types.Response.t()
   @doc """
   Gets a list of Pages contained in the database, filtered and ordered according to the filter conditions and sort criteria provided in the request. The response may contain fewer than page_size of results.
 
@@ -43,7 +43,7 @@ defmodule ThinNotionApi.Databases do
       iex> ThinNotionApi.Databases.create_database!("9b4a624d5a18482ab2187e54166edda7", "New Database")
       {:ok, %{...}}
   """
-  @spec create_database!(String.t(), String.t(), map()) :: Types.Response.response()
+  @spec create_database!(String.t(), String.t(), map()) :: Types.Response.t()
   def create_database!(
         parent_id,
         title,
@@ -62,7 +62,7 @@ defmodule ThinNotionApi.Databases do
     post("databases", body_params)
   end
 
-  @spec update_database!(String.t(), String.t(), map()) :: Types.Response.response()
+  @spec update_database!(String.t(), String.t(), map()) :: Types.Response.t()
   @doc """
   Updates an existing database as specified by the parameters.
 

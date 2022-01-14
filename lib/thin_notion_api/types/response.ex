@@ -1,3 +1,6 @@
 defmodule ThinNotionApi.Types.Response do
-  @type response() :: {:ok, map()} | {:error, any()}
+  @typedoc """
+  Response from the API, can either be a success or an error.
+  """
+  @type t :: {:ok, map()} | {:error, any()}
 end

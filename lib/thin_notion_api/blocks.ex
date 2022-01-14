@@ -8,7 +8,7 @@ defmodule ThinNotionApi.Blocks do
   import ThinNotionApi.Base
   alias ThinNotionApi.Types
 
-  @spec retrieve_block(String.t()) :: Types.Response.response()
+  @spec retrieve_block(String.t()) :: Types.Response.t()
   @doc """
   Retrieves a Block object using the ID specified.
 
@@ -37,7 +37,7 @@ defmodule ThinNotionApi.Blocks do
 
       {:ok, %{...}}
   """
-  @spec retrieve_block_children(String.t(), %{ start_cursor: String.t(), page_size: Integer.t() } | %{}) :: Types.Response.response()
+  @spec retrieve_block_children(String.t(), %{ start_cursor: String.t(), page_size: integer() } | %{}) :: Types.Response.t()
   def retrieve_block_children(block_id, params \\ %{}) do
     get("blocks/" <> block_id <> "/children", params)
   end
@@ -62,12 +62,12 @@ defmodule ThinNotionApi.Blocks do
 
       {:ok, %{...}}
   """
-  @spec update_block(String.t(), %{ archived: boolean()} | map()) :: Types.Response.response()
+  @spec update_block(String.t(), %{ archived: boolean()} | map()) :: Types.Response.t()
   def update_block(block_id, body_params) do
     patch("blocks/" <> block_id, body_params)
   end
 
-  @spec append_block_children(String.t(), list(map())) :: Types.Response.response()
+  @spec append_block_children(String.t(), list(map())) :: Types.Response.t()
   @doc """
   Creates and appends new children blocks to the parent block_id specified.
 
@@ -105,7 +105,7 @@ defmodule ThinNotionApi.Blocks do
 
       {:ok, %{...}}
   """
-  @spec delete_block(String.t()) :: Types.Response.response()
+  @spec delete_block(String.t()) :: Types.Response.t()
   def delete_block(block_id) do
     delete("blocks/" <> block_id)
   end
