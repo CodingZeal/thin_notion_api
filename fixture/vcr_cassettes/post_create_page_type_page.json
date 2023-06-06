@@ -1,7 +1,7 @@
 [
   {
     "request": {
-      "body": "{\"childern\":[],\"parent\":{\"page_id\":\"9b4a624d5a18482ab2187e54166edda7\"},\"properties\":{}}",
+      "body": "{\"children\":[],\"parent\":{\"page_id\":\"9b4a624d5a18482ab2187e54166edda7\"},\"properties\":{}}",
       "headers": {
         "Notion-Version": "2021-05-13",
         "Authorization": "***",

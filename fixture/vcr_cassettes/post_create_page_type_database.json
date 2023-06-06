@@ -1,7 +1,7 @@
 [
   {
     "request": {
-      "body": "{\"childern\":[],\"parent\":{\"database_id\":\"ee90be7f3fd14fd5961ef4203c7d9a81\"},\"properties\":{\"title\":{\"title\":[{\"text\":{\"content\":\"Create Page Database\"},\"type\":\"text\"}]}}}",
+      "body": "{\"children\":[],\"parent\":{\"database_id\":\"ee90be7f3fd14fd5961ef4203c7d9a81\"},\"properties\":{\"title\":{\"title\":[{\"text\":{\"content\":\"Create Page Database\"},\"type\":\"text\"}]}}}",
       "headers": {
         "Notion-Version": "2021-05-13",
         "Authorization": "***",
