@@ -41,7 +41,7 @@ defmodule ThinNotionApi.Pages do
     body_params = %{}
     |> Properties.set_page_parent(parent_id)
     |> Map.put(:properties, properties)
-    |> Map.put(:childern, children)
+    |> Map.put(:children, children)
 
     post("pages", body_params)
   end
@@ -50,7 +50,7 @@ defmodule ThinNotionApi.Pages do
     body_params = %{}
     |> Properties.set_database_parent(parent_id)
     |> Properties.set_database_properties(properties)
-    |> Map.put(:childern, children)
+    |> Map.put(:children, children)
 
     post("pages", body_params)
   end
