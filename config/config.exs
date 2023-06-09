@@ -1,7 +1,7 @@
 import Config
 
-config :thin_notion_api, :api_key, "test_api_key"
-config :thin_notion_api, :notion_version, "2021-08-16"
+config :thin_notion_api, :api_key, System.get_env("NOTION_API_KEY", "test_api_key")
+config :thin_notion_api, :notion_version, System.get_env("NOTION_VERSION", "2021-08-16")
 
 config :exvcr,
   vcr_cassette_library_dir: "fixture/vcr_cassettes",
