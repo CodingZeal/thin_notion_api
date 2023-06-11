@@ -37,7 +37,7 @@ defmodule ThinNotionApi.MixProject do
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.24", only: :dev, runtime: false},
       {:exvcr, "~> 0.13", only: :test},
-      {:httpoison, "~> 1.8"},
+      {:httpoison, "~> 2.0"},
       {:jason, "~> 1.2"},
       {:mix_test_interactive, "~> 1.0", only: :dev, runtime: false}
     ]
