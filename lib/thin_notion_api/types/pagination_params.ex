@@ -1,4 +1,8 @@
 defmodule ThinNotionApi.Types.PaginationParams do
+  @moduledoc """
+  Defines parameters for pagination.
+  """
+
   @typedoc """
   Parameters for pagination.
   """

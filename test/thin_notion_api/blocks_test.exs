@@ -30,7 +30,6 @@ defmodule ThinNotionApi.BlocksTest do
     end
   end
 
-
   test "PATCH update_block" do
     use_cassette "patch_update_block", match_requests_on: [:request_body] do
       {:ok, response} = Blocks.update_block("c4c027f4ea7c41c5908d63a7f5a9c32c", %{
@@ -91,7 +90,6 @@ defmodule ThinNotionApi.BlocksTest do
       |> get_in(["plain_text"]) == "Testing for append_block_children"
     end
   end
-
 
   test "DELETE block" do
     use_cassette "delete_block", match_requests_on: [:request_body] do

@@ -37,7 +37,7 @@ defmodule ThinNotionApi.Blocks do
 
       {:ok, %{...}}
   """
-  @spec retrieve_block_children(String.t(), %{ start_cursor: String.t(), page_size: integer() } | %{}) :: Types.Response.t()
+  @spec retrieve_block_children(String.t(), %{start_cursor: String.t(), page_size: integer()} | %{}) :: Types.Response.t()
   def retrieve_block_children(block_id, params \\ %{}) do
     get("blocks/" <> block_id <> "/children", params)
   end
@@ -62,7 +62,7 @@ defmodule ThinNotionApi.Blocks do
 
       {:ok, %{...}}
   """
-  @spec update_block(String.t(), %{ archived: boolean()} | map()) :: Types.Response.t()
+  @spec update_block(String.t(), %{archived: boolean()} | map()) :: Types.Response.t()
   def update_block(block_id, body_params) do
     patch("blocks/" <> block_id, body_params)
   end
@@ -91,7 +91,7 @@ defmodule ThinNotionApi.Blocks do
       {:ok, %{...}}
   """
   def append_block_children(block_id, children) do
-    patch("blocks/" <> block_id <> "/children", %{ children: children })
+    patch("blocks/" <> block_id <> "/children", %{children: children})
   end
 
   @doc """

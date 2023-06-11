@@ -1,4 +1,8 @@
 defmodule ThinNotionApi.Types.DatabaseQueryParams do
+  @moduledoc """
+  Defines the options for the database query API.
+  """
+
   @typedoc """
   Parameters for using the database query API.
   """

@@ -3,7 +3,8 @@ defmodule ThinNotionApi.Pages do
   Module for interacting with the Notion pages.
   """
   import ThinNotionApi.Base
-  alias ThinNotionApi.{Properties, Types}
+  alias ThinNotionApi.Properties
+  alias ThinNotionApi.Types
 
   @doc """
   Retrieves a Page object using the ID specified.

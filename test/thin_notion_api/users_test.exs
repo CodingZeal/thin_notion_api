@@ -2,7 +2,7 @@ defmodule ThinNotionApi.UsersTest do
   use ExUnit.Case, async: true
   use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
 
-	alias ThinNotionApi.Users
+  alias ThinNotionApi.Users
 
   setup_all do
     HTTPoison.start

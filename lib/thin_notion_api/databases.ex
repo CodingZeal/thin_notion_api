@@ -4,7 +4,8 @@ defmodule ThinNotionApi.Databases do
   """
 
   import ThinNotionApi.Base
-  alias ThinNotionApi.{Properties, Types}
+  alias ThinNotionApi.Properties
+  alias ThinNotionApi.Types
 
   @spec retrieve_database(String.t()) :: Types.Response.t()
   @doc """
