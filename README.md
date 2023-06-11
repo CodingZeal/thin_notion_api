@@ -55,17 +55,21 @@ Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_do
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/thin_notion_api](https://hexdocs.pm/thin_notion_api).
 
+
+## v2021 Supported Features
+
+- [x] List database
+- [x] Query database
+- [x] Page object actions
+- [x] Block actions
+- [x] User actions
+- [x] Search
+
 ## Development Progress
 
 TODO:
-
-- [x] Need to start adding tests
-- [x] List database query param support
-- [x] Query database with options
-- [x] Support all Page object actions
-- [x] Support all Block actions
-- [x] Support all User actions
-- [x] Support Search
+- [ ] Support changes for [2022-06-28](https://developers.notion.com/changelog/releasing-notion-version-2022-06-28])
+- [ ] Support changes for [version 2022-02-22](https://developers.notion.com/reference/changes-by-version)
 
 ## Release Process
 
